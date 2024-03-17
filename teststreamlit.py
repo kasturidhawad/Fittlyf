@@ -8,9 +8,9 @@ st.title("AB Test Calculator")
 
 # Collect user inputs
 control_visitors = st.number_input('Enter Control Visitors:', min_value=1)
-control_conversions = st.number_input('Enter Control Conversions:', min_value=0)
-experiment_visitors = st.number_input('Enter Experiment Visitors:', min_value=1)
-experiment_conversions = st.number_input('Enter Experiment Conversions:', min_value=0)
+control_conversions = st.number_input('Enter Control Conversions:', min_value=1)
+experiment_visitors = st.number_input('Enter Experiment Visitors:', min_value=2)
+experiment_conversions = st.number_input('Enter Experiment Conversions:', min_value=1)  
 confidence_level = st.slider('Select Confidence Level:', min_value=0, max_value=100, step=1, value=95)
 
 # Check if all required inputs are provided
@@ -54,3 +54,4 @@ if inputs_filled and st.button('Calculate'):
 # Show a warning message if inputs are not filled
 if not inputs_filled:
     st.warning("Please fill in all the required input fields.")
+
