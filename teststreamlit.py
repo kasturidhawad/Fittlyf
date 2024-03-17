@@ -13,6 +13,11 @@ experiment_visitors = st.number_input('Enter Experiment Visitors:', min_value=1)
 experiment_conversions = st.number_input('Enter Experiment Conversions:', min_value=0)
 confidence_level = st.slider('Select Confidence Level:', min_value=0, max_value=100, step=1, value=95)
 
+# Check if all required inputs are provided
+inputs_filled = control_visitors is not None and control_conversions is not None and \
+                experiment_visitors is not None and experiment_conversions is not None and \
+                confidence_level is not None
+
 # Define function to perform AB test
 def perform_ab_test(control_visitors, control_conversions, experiment_visitors, experiment_conversions, confidence_level):
     # Calculate conversion rates
@@ -41,7 +46,11 @@ def perform_ab_test(control_visitors, control_conversions, experiment_visitors, 
     
     return result
 
-# Create a button to calculate the AB test
-if st.button('Calculate'):
+# Create a button to calculate the AB test if all inputs are filled
+if inputs_filled and st.button('Calculate'):
     result = perform_ab_test(control_visitors, control_conversions, experiment_visitors, experiment_conversions, confidence_level)
     st.write(f"AB Test Result: {result}")
+
+# Show a warning message if inputs are not filled
+if not inputs_filled:
+    st.warning("Please fill in all the required input fields.")
